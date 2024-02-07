@@ -53,7 +53,14 @@ if(!empty($_POST)){
 <body>
 <form action="#" method="post">
         <input type="number" placeholder="enter..." name="operand1" value = "<?php echo (isset($num1))?$num1:'';?>" required>
-        <input type="text" placeholder="enter..." name="operator" value = "<?php echo (isset($operation))?$operation:'';?>" required>
+         <select name="operator">
+         <option value="+">+</option>
+         <option value="-">-</option>
+         <option value="*">*</option>
+         <option value="/">/</option>
+         <option value="%">%</option>
+         </select>
+        <!-- <input type="text" placeholder="enter..." name="operator" value = "<?php echo (isset($operation))?$operation:'';?>" required> -->
         <input type="number" placeholder="enter..." name="operand2" value = "<?php echo (isset($num2))?$num2:'';?>" required>
         <button name="submit" value="1">=</button>
         <input type="text" placeholder="enter..." name="result" value = "<?php echo (isset($result))?$result:$error;?>">
