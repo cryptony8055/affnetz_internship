@@ -6,7 +6,7 @@ if(empty($_SESSION)){
 }
 ?>
 <body>
-<div id="colorlib-page">
+<div id="colorlib-page" class="dotted_background">
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <div id="colorlib-logo"><a href="home.php"><img src="images/affnetz-logo.png" alt="affnetz" style="width:160px;height:50px;"></a> </div>
@@ -14,16 +14,22 @@ if(empty($_SESSION)){
             <ul>
                 <?php
                     if(!empty($_SESSION)){
-                       echo '<li class="colorlib-active"><a href="home.php">Home</a></li>
-                       <li class="colorlib"><a href="logout.php">Logout</a></li>'; 
+                        if($_SESSION['roles'] == 'admin'){
+                            echo '<li class="colorlib-active"><a href="home.php">Home</a></li>
+                            <li class="colorlib"><a href="admin.php">Admin Panel</a></li>
+                            <li class="colorlib"><a href="logout.php">Logout</a></li>';  
+                        }
+                        else{
+                            echo '<li class="colorlib-active"><a href="home.php">Home</a></li>
+                            <li class="colorlib"><a href="family_info.php?id='. $_SESSION['id'].'">Family Detail</a></li>
+                            <li class="colorlib"><a href="family.php">Add Family Detail</a></li>
+                            <li class="colorlib"><a href="logout.php">Logout</a></li>'; 
+                        }
                     } else {
-                        echo '<li><a href="index.php">Log-in</a></li>
+                        echo '<li class="colorlib-active"><a href="index.php">Log-in</a></li>
                         <li><a href="register.php">Registration</a></li>';
                     }
                 ?>
-                <!-- <li><a href="travel.php">Travel</a></li>
-                <li><a href="fashion.php">Fashion</a></li>
-                <li><a href="about.php">About</a></li>  -->
                 
             </ul>
         </nav>

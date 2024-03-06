@@ -21,16 +21,17 @@ $username = $_SESSION['display_name'];
 			<div class="desc">
 				<h2 class="subheading">Hello I'm</h2>
 				<h1 class="mb-4"><?= $username; ?></h1>
-				<p class="mb-4"> <?= $user_details['about'] ? $user_details['about'] : "I am A Blogger Far far away, behind the word mountains, far from the countries
-					Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right
-					at the coast of the Semantics, a large language ocean" ?></p>
+				<p class="mb-4"> <?= isset($user_details['about']) ? $user_details['about'] : "I am A Blogger Far far away, behind the word mountains, far from the countries
+					Vokalia and Consonantia, there live the blind texts." ?></p>
+				<p><a href="profile.php" class="btn-custom">More About Me <span class="ion-ios-arrow-forward"></span></a></p>
+			</div>
 			<div class="row d-flex mb-5 contact-info">
 	            <div class="col-md-12 mb-4">
 	              <h5 class="h4 font-weight-bold">Contact Information</h5>
 	            </div>
 	            <div class="w-100"></div>
 	            <div class="col-md-6">
-	              <p><span>Address:</span> <?= $user_details ? $user_details['pin']." ".$user_details['plot']." ".$user_details['city']." ".$user_details['district']." ".$user_details['st'] : "Na" ?></p>
+	              <p><span>Address:</span> <?= $user_details ? $user_details['pin']." ".$user_details['city']." ".$user_details['district']." ".$user_details['st'] : "Na" ?></p>
 	            </div>
 	            <div class="col-md-6">
 	              <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
@@ -42,8 +43,6 @@ $username = $_SESSION['display_name'];
 	              <p><span>Website</span> <a href="#">yoursite.com</a></p>
 	            </div>
 	        </div>
-				<p><a href="profile.php" class="btn-custom">More About Me <span class="ion-ios-arrow-forward"></span></a></p>
-			</div>
 		</div>
 	</div>
 </div>

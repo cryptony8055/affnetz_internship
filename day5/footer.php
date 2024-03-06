@@ -5,8 +5,6 @@
         <div class="ftco-footer-widget mb-4 ml-md-4">
           <h2 class="ftco-heading-2">Category</h2>
           <ul class="list-unstyled categories">
-            <li><a href="#">Photography <span>(6)</span></a></li>
-            <li><a href="#">Fashion <span>(8)</span></a></li>
             <li><a href="#">Technology <span>(2)</span></a></li>
             <li><a href="#">Travel <span>(2)</span></a></li>
           </ul>
@@ -18,9 +16,6 @@
           <ul class="list-unstyled categories">
             <li><a href="#">October 2018 <span>(6)</span></a></li>
             <li><a href="#">September 2018 <span>(6)</span></a></li>
-            <li><a href="#">August 2018 <span>(8)</span></a></li>
-            <li><a href="#">July 2018 <span>(2)</span></a></li>
-            <li><a href="#">June 2018 <span>(7)</span></a></li>
           </ul>
         </div>
       </div>
@@ -45,7 +40,7 @@
         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           Copyright &copy;
           <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
-            class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Aditya</a>
           <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         </p>
       </div>
@@ -76,11 +71,110 @@
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/jquery.timepicker.min.js"></script>
+  <!-- <script src="js/jquery.timepicker.min.js"></script> -->
   <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+  <!-- <script src="js/google-map.js"></script> -->
   <script src="js/main.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function viewaddress(item_id){
+      $.ajax({
+          url:"api.php",    //the page containing php script
+          type: "post",    //request type,
+          dataType: 'json',
+          data: {slug: "address", id: item_id },
+          success:function(result){
+              $('#add_content').text(result);
+              $('#exampleModalCentered').modal('show');
+          }
+      });
+    }
+    function deleteItem(item_id){
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url:"api.php",    //the page containing php script
+            type: "post",    //request type,
+            dataType: 'json',
+            data: {slug: "delete", id: item_id },
+            success:function(result){
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+              setTimeout(function () {
+                location.reload();
+              }, 2500);
+            }
+          });
+        }
+      });
+    }
+    function addFamilySection(){
+      var cnt = parseInt($('#addmore_count').val());
+      if(cnt<5){
+        var contentHtml = $('#familyContent').html();
+        var appendHtml = $('#familyAppend').append(contentHtml);
+        $(appendHtml).find(".change").html('<input type="button" value="Remove" class="btn btn-primary btn-sm py-2 px-3 remove ">');
+        $('#addmore_count').val(cnt+1);
+      } else {
+        alert('maximum members reached!!!');
+      }
+    }
+    $("body").on("click",".remove",function(){ 
+        var cnt = parseInt($('#addmore_count').val());
+        $(this).parents(".mg").remove();
+        $('#addmore_count').val(cnt-1);
+    });
+    function approveUser(item_id){
+      $.ajax({
+          url:"api.php",    //the page containing php script
+          type: "post",    //request type,
+          dataType: 'json',
+          data: {slug: "approve", id: item_id },
+          success:function(result){
+              location.reload();
+
+          }
+      });
+    }
+    function unapproveUser(item_id){
+      $.ajax({
+          url:"api.php",    //the page containing php script
+          type: "post",    //request type,
+          dataType: 'json',
+          data: {slug: "unapprove", id: item_id },
+          success:function(result){
+              location.reload();
+
+          }
+      });
+    }
+    function deleteFamily(item_id){
+      $.ajax({
+          url:"api.php",    //the page containing php script
+          type: "post",    //request type,
+          dataType: 'json',
+          data: {slug: "deleteFamily", id: item_id },
+          success:function(result){
+              location.reload();
+
+          }
+      });
+    }
+  </script>
     
   </body>
 </html>

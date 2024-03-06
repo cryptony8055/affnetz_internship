@@ -2,7 +2,7 @@
 include('header.php');
 ?>
 <body>
-<div id="colorlib-page">
+<div id="colorlib-page" class="dotted_background">
     <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <div id="colorlib-logo"><a href="home.php"><img src="images/affnetz-logo.png" alt="affnetz" style="width:160px;height:50px;"></a> </div>

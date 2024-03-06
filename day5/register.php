@@ -7,18 +7,19 @@ if(!empty($_POST)){
     $password_hash = password_hash($_POST["pass"], PASSWORD_DEFAULT);
     $email = $_POST['email'];
     $cpass = $_POST['confpass'];
+    $status = 0;
     $roles = 'user';
 
     if($pass==$cpass){
         include('database.php');
-        $sql = "INSERT INTO users(display_name,email,pass,roles)
-                VALUES(?,?,?,?)";
+        $sql = "INSERT INTO users(display_name,email,pass,roles,user_status)
+                VALUES(?,?,?,?,?)";
         $stmt = mysqli_stmt_init($conn);
         if( ! mysqli_stmt_prepare($stmt,$sql)){
             die("sql error");
         }
     
-        mysqli_stmt_bind_param($stmt,"ssss",$inputname,$email,$password_hash,$roles);
+        mysqli_stmt_bind_param($stmt,"ssssi",$inputname,$email,$password_hash,$roles,$status);
         mysqli_stmt_execute($stmt);
     } else {
         $error = '<p style="color:red;">password and confirm password doesnot match</P>';
